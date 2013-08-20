@@ -27,3 +27,27 @@ function WikiBanner( OutputPage &$out, Skin &$skin ) {
 
 	return TRUE;
 }
+
+//Experimental new code for sidebar
+
+$wgUseSidebarBanner = false;
+
+function WikiBannerGlobals() {
+	global $wgUseSidebarBanner;
+}
+
+if ( $wgUseSidebarBanner = true ) {
+
+	$wgSidebarBannerCode = 'Set banner code';
+	$wgSidebarBannerTitle = 'Set banner title';
+
+	$wgHooks['SkinBuildSidebar'][] = 'WikiSidebarBanner';
+	function WikiSidebarBanner( $skin, &$bar ) {
+		global $wgSidebarBannerCode, $wgSidebarBannerTitle;
+	
+		$out = "$wgSidebarBannerCode";
+		$bar["$wgSidebarBannerTitle"] = $out;
+	
+		return TRUE;
+	}
+} else { }
